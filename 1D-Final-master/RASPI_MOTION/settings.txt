@@ -1,0 +1,6 @@
+url,# insert url here
+apikey,# insert apikey here
+rm_no,5904
+
+sleep_time,30
+gpio,19

@@ -1,0 +1,753 @@
+<LoginWindow>:
+    name: "login"
+    studentid :studentid
+    roomno: roomno
+
+    FloatLayout:
+
+        Label:
+            halign: "center"
+            pos_hint: {"top":1}
+            size_hint: 1, 0.2
+
+            canvas.before:
+                Color:
+                    rgba: .06, .45, .45, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            Label:
+                text: "GotSPACE?"
+                bold: True
+                center_y: self.parent.center_y
+                center_x: self.parent.center_x + self.width/2
+                font_size: 50
+                size_hint: None, None
+
+
+            Image:
+                source: "./images/logo.png"
+                center_x: self.parent.center_x - 3*self.width/2
+                center_y: self.parent.center_y
+                # size: self.size
+                # on_size: self.size = tuple(map(int, args[1]))
+                # on_pos: self.pos = tuple(map(int, args[1]))
+
+        Label:
+            pos_hint: {"center_x":0.3, "center_y":0.55}
+            size_hint: None, None
+            size: 50, 50
+
+            Image:
+                source: "./images/id.png"
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.parent.width, self.parent.height
+
+        TextInput:
+            id: studentid
+            font_size: 24
+            multiline: False
+            pos_hint: {"x": 0.35 , "center_y":0.55}
+            size_hint: 0.4, 0.1
+            hint_text: "Student ID (1003333)"
+
+        Label:
+            pos_hint: {"center_x":0.3, "center_y":0.4}
+            size_hint: None, None
+            size: 50, 50
+
+            Image:
+                source: "./images/rm.png"
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.parent.width, self.parent.height
+
+        TextInput:
+            id: roomno
+            font_size: 24
+            multiline: False
+            password: True
+            pos_hint: {"x": 0.35, "center_y":0.4}
+            size_hint: 0.4, 0.1
+            hint_text: "Room Number (59-04-75)"
+            
+        Button:
+            canvas.after:
+                Color:
+                    rgba: .06, .45, .45, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            pos_hint:{'center_x': 0.7, 'y': 0.05}
+            size_hint: 0.2, 0.1
+            font_size: 20
+            text: "Login"
+            background_normal: ''
+            background_color: .06, .45, .45, 0
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.check()
+
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 1, 0, 0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            pos_hint:{'center_x': 0.3, 'y': 0.05}
+            size_hint: 0.2, 0.1
+            font_size: 20
+            text: "Quit"
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            on_release:
+                root.quit()
+
+
+
+<TermsWindow>:
+    name: "terms"
+    
+    FloatLayout:
+        Button:
+            pos_hint:{"x":0.8,"y":0.1}
+            size_hint: 0.15, 0.1
+            font_size: 20
+            text: "Agree"
+            background_color: 0, 1, 0, 1
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "left"
+        
+        Button:
+            pos_hint:{"x":0.05,"y":0.1}
+            size_hint: 0.15, 0.1
+            font_size: 20
+            text: "Disagree"
+            background_color: 1, 0, 0, 1
+            on_release:
+                app.root.current = "login"
+                root.manager.transition.direction = "right"
+                
+        Label:
+            pos_hint: {"center_x":0.5, "top":0.9}
+            size_hint: 0.5, 0.1
+            bold: True
+            text_size: self.width, None
+            font_size: 30
+            text: "Terms and Conditions"
+            halign: "center"
+            valign: "center"
+
+        Label:
+            text: 'This Data Protection Notice ("Notice") sets out the basis which SUTD Hostel and "GotSPACE" Developers ("we", "us", or "our") may collect, use, disclose or otherwise process personal data of our customers in accordance with the Personal Data Protection Act ("PDPA"). This Notice applies to personal data in our possession or under our control, including personal data in the possession of organisations which we have engaged to collect, use, disclose or process personal data for our purposes. \n\nUse of Personal Data: \n1. Monitoring movements and noise level in SUTD Hostel Study Rooms (Block 55,57,59) \n2. Taking pictures to determine the number of vacancies in SUTD Hostel Study Rooms (Block 55,57,59) \n3. Responding to, handling, and processing queries, requests, applications, complaints, and feedback regarding SUTD Hostel and users. \n\nBy clicking the "Agree" button below, you have agreed on Personal Data Protection Act above and to follow SUTD Hostel Rules.'
+            pos_hint: {'x': 0.05, 'top': 0.8}
+            size_hint: 0.9,0.6
+            height: self.texture_size[1]
+            text_size: self.width, None
+            halign: 'justify'
+            
+            
+<MainWindow>:
+    name: "main"
+    
+    FloatLayout: 
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 1, 0, 0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal:''
+            background_color: 0, 0, 0, 0
+            pos_hint:{"center_x":0.25,"top":0.7}
+            size_hint: None, None
+            font_size: (root.width**2 + root.height**2) / 15**4
+            # text: "Housing Rules"
+            on_release:
+                app.root.current = "rules"
+                root.manager.transition.direction = "left"  
+            Image:
+                source: "./images/rules2.png"
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.parent.width * 0.8, self.parent.height * 0.8
+            Label:
+                text: "Housing Rules"
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y - 75
+        
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 1, 1, 0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            pos_hint:{"center_x":0.5,"top":0.7}
+            size_hint: None, None
+            font_size: (root.width**2 + root.height**2) / 15**4
+            # text: "Check Study Room"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.checkRms()
+            Image:
+                source: "./images/check.png"
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.parent.width, self.parent.height
+            Label:
+                text: "Check Study Room"
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y - 75
+
+        
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 0, 1, 0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            pos_hint:{"center_x":0.75,"top":0.7}
+            size_hint: None, None
+            font_size: (root.width**2 + root.height**2) / 15**4
+            # text: "Book Study Room"
+            on_release:
+                root.external()
+            Image:
+                source: "./images/book.png"
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: self.parent.width, self.parent.height
+            Label:
+                text: "Book Study Room"
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y - 75
+
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 1, 0, 0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            pos_hint:{"center_x":.5,"top":.3}
+            size_hint: 0.15, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Logout"
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            on_release:
+                app.root.current = "login"
+                root.manager.transition.direction = "right"
+
+                
+<HousingRules>:
+    name: 'rules'
+       
+    FloatLayout:
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 1, 0, 0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            pos_hint: {"center_x":.5,"top":.2}
+            size_hint: 0.15, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Back"
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+        
+        Label:
+            pos_hint: {"center_x":0.5, "top":0.95}
+            size_hint: 0.3, 0.1
+            bold: True
+            text_size: self.width, None
+            font_size: 30
+            text: "Housing Rules"
+            halign: "center"
+            valign: "center"
+
+        Label:
+            pos_hint: {'x': 0.05, 'top': 0.85}
+            size_hint: 0.9,0.6
+            height: self.texture_size[1]
+            text_size: self.width, None
+            halign: 'justify'
+            text: 'The following apply to all common residential facilities: \n\n1. The SUTD Student Conduct Policy as well as the Student Housing Terms and Conditions apply to all residents using common facilities in the residential blocks. \n2. Quiet hours in the residence are 10:00pm to 8:00am daily. Please respect fllow residents by keeping noise levels to a minimum during this period. \n3. Visiting hours: 8.00am to 10.00pm daily. Do accompany your visitors at all times. All visitors are not permitted to be in the residential blocks outside of visiting hours. /n4. Residents share the responsibility of maintaining the upkeep of common facilities. Please do not hand notices, posters or banners in or aroud common facilities, unless approval has been obtained from the Office of Housing. \n5. The furniture provided is for the common use of all residents; please refrain from removing any furniture from the common facilities, or bringing in furniture from other rooms. \n6. Persistent misuse/abuse of common facilities may result in them having to be closed off. \n7. Please read through the instruction manuals of all provided appliances before using them. \n8. Guard your belonging at all times. The University will not be responsible for the loss or damage of personal items. \n9. Carry out student card and room card at all times. You may be required to produce such identification if necessary. \n10. SUTD reserves the right to amend the house rules/terms of use, booking guidelines and opening hours of all facilities at its discretion.'
+
+      
+<Blk59>:
+    name: 'Blk59'
+    b5904: b5904
+    b5906: b5906
+    b5910: b5910
+    FloatLayout:
+        Label:
+            text: "Block 59 Status"
+            font_size: 32
+            bold: True
+            text_size: self.parent.size
+            valign: "center"
+            halign: "center"
+            pos_hint: {"center_y":0.9, "center_x":0.5}
+            size_hint: 1, 0.2
+
+        Button:
+            canvas.after:
+                Color:
+                    rgba: .06, .45, .45, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            pos_hint:{"center_x":0.2,"top":0.8}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Check 59 Lvl 04"
+
+            on_release:
+                root.manager.transition.direction = "left"
+                root.check("5904")
+                
+        Button:
+            canvas.after:
+                Color:
+                    rgba: .06, .45, .45, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            pos_hint:{"center_x":0.2,"top":0.6}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Check 59 Lvl 06"
+
+            on_release:
+                root.manager.transition.direction = "left"
+                root.check("5906")
+
+        Button:
+            canvas.after:
+                Color:
+                    rgba: .06, .45, .45, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            pos_hint:{"center_x":0.2,"top":0.4}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Check 59 Lvl 10"
+
+            on_release:
+                root.manager.transition.direction = "left"
+                root.check("5910")
+
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 0, .8, .0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            pos_hint:{"center_x":0.2,"top":0.2}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Check 59 ALL"
+
+            on_release:
+                root.manager.transition.direction = "left"
+                root.check()
+
+        Label:
+            id: b5904
+            pos_hint:{"x":0.35,"top":0.8}
+            size_hint: 0.5, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Unable to connect to database"
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            id: b5906
+            pos_hint:{"x":0.35,"top":0.6}
+            size_hint: 0.5, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Unable to connect to database"
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            id: b5910
+            pos_hint:{"x":0.35,"top":0.4}
+            size_hint: 0.5, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Unable to connect to database"
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+        
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 1, 0, 0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.8,"top":0.2}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 0.8, 0.8, 0.2, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.5,"top":0.2}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Get Last Record"
+            on_release:
+                root.refresh()
+
+
+<Blk57>:
+    name: 'Blk57'
+    b5704: b5704
+    b5706: b5706
+    b5710: b5710
+    FloatLayout:
+        Label:
+            text: "Block 57 Status"
+            font_size: 32
+            bold: True
+            text_size: self.parent.size
+            valign: "center"
+            halign: "center"
+            pos_hint: {"center_y":0.9, "center_x":0.5}
+            size_hint: 1, 0.2
+
+        Button:
+            canvas.after:
+                Color:
+                    rgba: .06, .45, .45, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.2,"top":0.8}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Check 57 Lvl 04"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.check("5704")
+                
+        Button:
+            canvas.after:
+                Color:
+                    rgba: .06, .45, .45, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.2,"top":0.6}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Check 57 Lvl 06"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.check("5706")
+        Button:
+            canvas.after:
+                Color:
+                    rgba: .06, .45, .45, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.2,"top":0.4}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Check 57 Lvl 10"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.check("5710")
+                
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 0, .8, .0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.2,"top":0.2}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Check 57 ALL"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.check()
+
+        Label:
+            id: b5704
+            pos_hint:{"x":0.35,"top":0.8}
+            size_hint: 0.5, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Unable to connect to database"
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            id: b5706
+            pos_hint:{"x":0.35,"top":0.6}
+            size_hint: 0.5, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Unable to connect to database"
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            id: b5710
+            pos_hint:{"x":0.35,"top":0.4}
+            size_hint: 0.5, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Unable to connect to database"
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+        
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 1, 0, 0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.8,"top":0.2}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 0.8, 0.8, 0.2, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.5,"top":0.2}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Get Last Record"
+            on_release:
+                root.refresh()
+
+
+<Blk55>:
+    name: 'Blk55'
+    b5504: b5504
+    b5506: b5506
+    b5510: b5510
+    FloatLayout:
+        Label:
+            text: "Block 55 Status"
+            font_size: 32
+            bold: True
+            text_size: self.parent.size
+            valign: "center"
+            halign: "center"
+            pos_hint: {"center_y":0.9, "center_x":0.5}
+            size_hint: 1, 0.2
+
+        Button:
+            canvas.after:
+                Color:
+                    rgba: .06, .45, .45, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.2,"top":0.8}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Check 55 Lvl 04"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.check("5504")
+                
+        Button:
+            canvas.after:
+                Color:
+                    rgba: .06, .45, .45, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.2,"top":0.6}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Check 55 Lvl 06"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.check("5506")
+        Button:
+            canvas.after:
+                Color:
+                    rgba: .06, .45, .45, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.2,"top":0.4}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Check 55 Lvl 10"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.check("5510")
+                
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 0, .8, .0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.2,"top":0.2}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Check 55 ALL"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.check()
+
+        Label:
+            id: b5504
+            pos_hint:{"x":0.35,"top":0.8}
+            size_hint: 0.5, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Unable to connect to database"
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            id: b5506
+            pos_hint:{"x":0.35,"top":0.6}
+            size_hint: 0.5, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Unable to connect to database"
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+        Label:
+            id: b5510
+            pos_hint:{"x":0.35,"top":0.4}
+            size_hint: 0.5, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Unable to connect to database"
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+        
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 1, 0, 0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.8,"top":0.2}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+        Button:
+            canvas.after:
+                Color:
+                    rgba: 0.8, 0.8, 0.2, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+
+            pos_hint:{"center_x":0.5,"top":0.2}
+            size_hint: 0.2, 0.1
+            font_size: (root.width**2 + root.height**2) / 15**4
+            text: "Get Last Record"
+            on_release:
+                root.refresh()
+
+

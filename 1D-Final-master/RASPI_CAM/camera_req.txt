@@ -1,0 +1,5 @@
+libdw==4.2.0
+numpy==1.15.3
+opencv-contrib-python==3.4.4.19
+picamera==1.13
+sseclient==0.0.22

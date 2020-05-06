@@ -1,0 +1,8 @@
+url,# insert url here
+apikey,# insert apikey here
+base_dir,./yolo-coco/
+min_confidence,0.5
+min_threshold,0.3
+rotation,270
+rm_no,5904
+debug,False
